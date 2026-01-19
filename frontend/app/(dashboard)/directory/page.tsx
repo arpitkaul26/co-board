@@ -100,12 +100,12 @@ export default function DirectoryPage() {
     }
   };
 
-  const formatStatus = (status: string) => {
-    return status
-      .split("_")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
+  // const formatStatus = (status: string) => {
+  //   return status
+  //     .split("")
+  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //     .join(" ");
+  // };
 
   const searchParams = useSearchParams();
 
@@ -150,7 +150,7 @@ export default function DirectoryPage() {
               </Select>
               <Select
                 value={statusFilter}
-                onValueChange={(value) => dispatch(setStatusFilter(value))}
+                onValueChange={(value) => dispatch(setStatusFilter(value as any))}
               >
                 <SelectTrigger className="w-full sm:w-[150px]">
                   <SelectValue placeholder="Status" />
@@ -197,12 +197,12 @@ export default function DirectoryPage() {
               <Card
                 key={employee.id}
                 className="cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => setSelectedEmployee(employee)}
+                onClick={() => setSelectedEmployee(employee as any)}
               >
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center">
                     <Avatar className="h-20 w-20 mb-4">
-                      <AvatarImage src={employee.avatar || "/placeholder.svg"} alt={employee.name} />
+                      <AvatarImage src={employee.profileImage || "/placeholder.svg"} alt={employee.name} />
                       <AvatarFallback className="text-lg">
                         {employee.name
                           .split(" ")
@@ -218,7 +218,7 @@ export default function DirectoryPage() {
                       variant="outline"
                       className={`mt-2 ${getStatusColor(employee.status)}`}
                     >
-                      {formatStatus(employee.status)}
+                      {/* {formatStatus(employee.status)} */}
                     </Badge>
                     <div className="flex items-center gap-1 mt-3 text-xs text-muted-foreground">
                       <Building2 className="h-3 w-3" />
@@ -237,10 +237,10 @@ export default function DirectoryPage() {
                   <div
                     key={employee.id}
                     className="flex items-center gap-4 p-4 hover:bg-muted/50 cursor-pointer transition-colors"
-                    onClick={() => setSelectedEmployee(employee)}
+                    onClick={() => setSelectedEmployee(employee as any)}
                   >
                     <Avatar className="h-12 w-12">
-                      <AvatarImage src={employee.avatar || "/placeholder.svg"} alt={employee.name} />
+                      <AvatarImage src={employee.profileImage || "/placeholder.svg"} alt={employee.name} />
                       <AvatarFallback>
                         {employee.name
                           .split(" ")
@@ -255,7 +255,7 @@ export default function DirectoryPage() {
                           variant="outline"
                           className={getStatusColor(employee.status)}
                         >
-                          {formatStatus(employee.status)}
+                          {/* {formatStatus(employee.status)} */}
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground truncate">
@@ -305,7 +305,7 @@ export default function DirectoryPage() {
                   <div className="flex items-center gap-4">
                     <Avatar className="h-16 w-16">
                       <AvatarImage
-                        src={selectedEmployee.avatar || "/placeholder.svg"}
+                        src={selectedEmployee.profileImage || "/placeholder.svg"}
                         alt={selectedEmployee.name}
                       />
                       <AvatarFallback className="text-xl">
@@ -370,7 +370,7 @@ export default function DirectoryPage() {
                             variant="outline"
                             className={getStatusColor(selectedEmployee.status)}
                           >
-                            {formatStatus(selectedEmployee.status)}
+                            {/* {formatStatus(selectedEmployee.status)} */}
                           </Badge>
                         </div>
                       </div>

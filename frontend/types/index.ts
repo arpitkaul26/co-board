@@ -160,6 +160,7 @@ export interface AnnouncementsState extends ApiState<Announcement[]> {
 
 // ==================== Directory ====================
 export interface EmployeeCard {
+  status: any;
   id: string;
   name: string;
   email: string;
@@ -170,6 +171,21 @@ export interface EmployeeCard {
   profileImage: string | null;
 }
 
+export interface Employee {
+  status: any;
+  joinDate: string | number | Date;
+  id: string;
+  name: string;
+  email: string;
+  department: string;
+  position: string;
+  rating: number;
+  ratingCount: number;
+  profileImage: string | null;
+  phone: number | string;
+  location: string;
+}
+
 export interface DirectoryFilters {
   search: string;
   department: string;
@@ -177,9 +193,36 @@ export interface DirectoryFilters {
   sortOrder: 'asc' | 'desc';
 }
 
+// export interface DirectoryState  {
+//   filters: DirectoryFilters;
+// }
+
 export interface DirectoryState extends ApiState<EmployeeCard[]> {
-  filters: DirectoryFilters;
+  // ────────────────
+  // Data
+  // ────────────────
+  data: EmployeeCard[];
+  loading: boolean;
+  error: string | null;
+
+  // ────────────────
+  // Directory page UI filters
+  // ────────────────
+  searchQuery: string;
+  departmentFilter: string;
+  statusFilter: "active" | "on_leave" | "inactive" | "all";
+
+  // ────────────────
+  // Legacy / Inbox filters (DO NOT REMOVE)
+  // ────────────────
+  filters: {
+    search: string;
+    department: string;
+    sortBy: "name" | "department" | "rating";
+    sortOrder: "asc" | "desc";
+  };
 }
+
 
 // ==================== Admin ====================
 export type ApprovalType = 'ATTENDANCE_FIX' | 'WFH' | 'SICK_LEAVE';

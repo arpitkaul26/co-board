@@ -12,17 +12,19 @@ import { mockDirectory } from "@/lib/mock-data";
  * - `filters` → legacy / inbox / sorting
  * - flat filters → directory UI
  */
+
+
 const initialState: DirectoryState = {
   data: [],
   loading: false,
   error: null,
 
-  // ✅ UI filters (Directory page)
-  searchQuery: "",
+  // Directory UI filters
+  searchQuery: "all",
   departmentFilter: "all",
   statusFilter: "all",
 
-  // ✅ Existing filters (Inbox / shared logic)
+  // Legacy / Inbox filters
   filters: {
     search: "",
     department: "",
@@ -30,6 +32,7 @@ const initialState: DirectoryState = {
     sortOrder: "asc",
   },
 };
+
 
 export const fetchDirectory = createAsyncThunk(
   "directory/fetch",
@@ -97,8 +100,12 @@ const directorySlice = createSlice({
     },
 
     resetLegacyFilters: (state) => {
-      state.filters = initialState.filters;
+      state.filters.search = initialState.filters.search;
+      state.filters.department = initialState.filters.department;
+      state.filters.sortBy = initialState.filters.sortBy;
+      state.filters.sortOrder = initialState.filters.sortOrder;
     },
+
   },
 
   extraReducers: (builder) => {
